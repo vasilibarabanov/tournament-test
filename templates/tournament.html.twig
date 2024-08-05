@@ -1,0 +1,64 @@
+{% for division in tournament.divisions %}
+    <table>
+        <caption>{{ division.name }}</caption>
+        <tr>
+            <th>Teams</th>
+            {% for team in division.teams %}
+                <th>{{ team.name }}</th>
+            {% endfor %}
+            <th>Score</th>
+        </tr>
+        {% set line = 1 %}
+        {% for team in division.teams %}
+            <tr>
+                <th>{{ team.name }}</th>
+                {% set counter = 1 %}
+                {% for result in team.groupResults %}
+                    {% if counter == line %}
+                        <td bgcolor="grey"></td>
+                    {% endif %}
+
+                    {% if counter < line %}
+                        <td>{{ result.score|reverse }}</td>
+                    {% else %}
+                        <td>{{ result.score }}</td>
+                    {% endif %}
+
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+                {% if line == division.teams|length %}
+                    <td bgcolor="grey"></td>
+                {% endif %}
+                <td>{{ division.scores[team.getId()] }}</td>
+            </tr>
+            {% set line = line + 1 %}
+        {% endfor %}
+    </table>
+{% endfor %}
+
+<div class="result-data">
+    <div class="split split-one">
+        {% set counter = 0 %}
+        {% for stage, stageData in playoffData %}
+            <div class="round">
+                <div class="round-details">Stage: {{ stage }}<br/></div>
+                {% for result in stageData %}
+                    <ul class="matchup round-{{ counter }}">
+                        <li class="team team-top">{{ result.firstTeam }}<span class="score">{{ result.score }}</span></li>
+                        <li class="team team-bottom">{{ result.secondTeam }}</li>
+                    </ul>
+                {% endfor %}
+            </div>
+            {% set counter = counter + 1 %}
+        {% endfor %}
+
+        <div class="round result">
+            <div class="round-details">Result<br/></div>
+            <ol>
+                {% for result in results %}
+                    <li>{{ result }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,1 @@
-# tournament-test
+Для установки выполните `make init`
