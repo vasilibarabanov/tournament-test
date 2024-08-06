@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Model\Event\Tournament\Action;
 
-use App\Entity\Pair;
 use App\Entity\Tournament;
 use App\Model\Event\Tournament\Context\ContextInterface;
+use App\Model\Event\Tournament\Playoff\Pair;
 use App\Repository\TeamRepository;
 
 readonly class CollectPlayoffTeams implements ActionInterface

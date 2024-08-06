@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Model\Event\Tournament\Playoff;
 
-use App\Entity\Pair;
 use App\Entity\Tournament;
 use App\Model\Event\Tournament\Result\ResultSimulatorInterface;
 

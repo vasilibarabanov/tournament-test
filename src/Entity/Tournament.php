@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\Event\Tournament\Playoff\Pair;
 use App\Repository\TournamentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

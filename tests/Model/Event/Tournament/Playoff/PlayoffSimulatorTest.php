@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Model\Event\Tournament\Playoff;
 
-use App\Entity\Pair;
 use App\Entity\Team;
 use App\Entity\Tournament;
+use App\Model\Event\Tournament\Playoff\Pair;
 use App\Model\Event\Tournament\Playoff\PlayoffSimulator;
 use App\Model\Event\Tournament\Result\ResultSimulatorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
