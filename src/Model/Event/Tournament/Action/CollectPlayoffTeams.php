@@ -18,18 +18,25 @@ readonly class CollectPlayoffTeams implements ActionInterface
 
     public function execute(Tournament $tournament, ContextInterface $context): void
     {
-        [$firstDiv, $secondDiv] = $tournament->getDivisions();
-        $firstScores = $firstDiv->getPlayoffTeams();
-        $secondScores = $secondDiv->getPlayoffTeams();
-        $counter = 0;
-        $commandQuantity = $context->getPlayoffTeamQuantity();
-        while ($counter !== $commandQuantity) {
-            $pair = new Pair(
-                $this->teamRepository->find($firstScores[$counter]),
-                $this->teamRepository->find($secondScores[$commandQuantity - $counter - 1])
-            );
-            $tournament->addPlayoffPair($pair);
-            $counter++;
+        $divisions = $tournament->getDivisions()->getValues();
+        if (empty($divisions)) {
+            return;
         }
+        do {
+            $firstDiv = current($divisions);
+            $secondDiv = next($divisions);
+            $firstDivBestTeams = $firstDiv->getBestTeams();
+            $secondDivBestTeams = $secondDiv->getBestTeams();
+            $counter = 0;
+            $commandQuantity = $context->getPlayoffTeamQuantity();
+            while ($counter !== $commandQuantity) {
+                $pair = new Pair(
+                    $this->teamRepository->find($firstDivBestTeams[$counter]),
+                    $this->teamRepository->find($secondDivBestTeams[$commandQuantity - $counter - 1])
+                );
+                $tournament->addPlayoffPair($pair);
+                $counter++;
+            }
+        } while (next($divisions));
     }
 }

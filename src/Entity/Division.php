@@ -116,7 +116,7 @@ class Division
         return $this->scores;
     }
 
-    public function getPlayoffTeams(): array
+    public function getBestTeams(): array
     {
         if (!empty($this->playoffTeams)) {
             return $this->playoffTeams;
